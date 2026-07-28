@@ -1,29 +1,12 @@
+import os
 import requests
-import random
 
-TOKEN = "8982228087:AAH4DSJ9nRhcOKlYNgcAcfV3nGA_ez03lbE"
-CHAT_ID = "8713385516"
+# GitHub Secrets (သို့မဟုတ်) Environment Variables ထဲကနေ လှမ်းယူခြင်း
+TOKEN = os.getenv("TELEGRAM_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
 
-MOTIVATION_MESSAGE_LIST = [
-    "⭐️ English: Every day is a new beginning.\n🇲🇲 မြန်မာ: ရက်တိုင်းဟာ အစသစ်တစ်ခုပါပဲ။",
-    "⭐️ English: Small daily improvements lead to stunning results.\n🇲🇲 မြန်မာ: နေ့စဉ်တိုးတက်မှုက အံ့မခန်းရလဒ်ကို ဖန်တီးပေးတယ်။",
-    "⭐️ English: Believe you can and you're halfway there.\n🇲🇲 မြန်မာ: လုပ်နိုင်တယ်လို့ ယုံကြည်လိုက်ပါ။",
-    "⭐️ English: Push yourself, because no one else will.\n🇲🇲 မြန်မာ: ကိုယ့်ကိုကိုယ် တွန်းအားယူပါ။",
-    "⭐️ English: Success doesn't just find you; you must go get it.\n🇲🇲 မြန်မာ: အောင်မြင်မှုကို ကိုယ်တိုင် သွားယူရပါမယ်။"
-]
+message = "မင်္ဂလာပါ! နေ့စဉ်အားပေးစကား..."
+url = f"https://api.telegram.org/bot{TOKEN}/sendMessage?chat_id={CHAT_ID}&text={message}"
 
-def send_telegram_message():
-    message = random.choice(MOTIVATION_MESSAGE_LIST)
-    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
-    payload = {"chat_id": CHAT_ID, "text": message}
-    try:
-        response = requests.post(url, json=payload)
-        if response.status_code == 200:
-            print("မက်ဆေ့ချ် အောင်မြင်စွာ ပို့ပြီးပါပြီ။")
-        else:
-            print("ပို့၍ မအောင်မြင်ပါ၊", response.text)
-    except Exception as e:
-        print("Error:", e)
-
-if __name__ == "main__":
-    send_telegram_message()
+response = requests.get(url)
+print(response.json())
