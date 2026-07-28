@@ -25,5 +25,5 @@ def send_telegram_message():
     except Exception as e:
         print("Error:", e)
 
-if __name == "main__":
+if __name__ == "__main__":
     send_telegram_message()
