@@ -2,7 +2,7 @@ name: Send Daily Motivation
 
 on:
   schedule:
-    - cron: '0 1 * * *'
+    - cron: '0 1 * * *'  # UTC အချိန် ည ၁ နာရီ (UAE အချိန် မနက် ၅ နာရီ)
   workflow_dispatch:
 
 jobs:
@@ -22,8 +22,5 @@ jobs:
           pip install requests
 
       - name: Run script
-        env:
-          TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
-          CHAT_ID: ${{ secrets.CHAT_ID }}
         run: |
           python motivation.py
